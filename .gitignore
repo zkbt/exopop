@@ -1,7 +1,7 @@
 
 *.pdf
 .ipynb_checkpoints
-*.ipynb
+#*.ipynb
 scratch/
 notebooks/
 .pytest_cache/
@@ -19,7 +19,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
+#build/
 develop-eggs/
 dist/
 downloads/

@@ -1,0 +1,1660 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating &#8212; exoplanet-atlas 0.2.4 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Visualizing" href="visualizing.html" />
+    <link rel="prev" title="Exploring" href="exploring.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+</style>
+<div class="section" id="Creating">
+<h1>Creating<a class="headerlink" href="#Creating" title="Permalink to this headline">¶</a></h1>
+<p>The primary goal of <code class="docutils literal"><span class="pre">exoatlas</span></code> is to create populations of exoplanets
+which which we can interact in fairly standardized way. Here we
+summarize a few different pre-defined <code class="docutils literal"><span class="pre">Population</span></code> objects we can
+create.</p>
+<p><em>Documentation to add:</em></p>
+<ul class="simple">
+<li>Add some more details for populations.</li>
+<li>Explain how to create your own default population.</li>
+<li>Talk about filtering false positives in the TOI population.</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">exoatlas</span> <span class="k">as</span> <span class="nn">ea</span>
+</pre></div>
+</div>
+</div>
+<p>Throughout this page we&#8217;ll use handy <code class="docutils literal"><span class="pre">physical_summary()</span></code> wrapper as a
+way to visualize some of the basic properties of a particular
+population. For more on useful plots and plotting tools, see
+<a class="reference external" href="visualizing.html">Visualizing</a>.</p>
+<div class="section" id="Solar-System">
+<h2>Solar System<a class="headerlink" href="#Solar-System" title="Permalink to this headline">¶</a></h2>
+<p>The eight planets in our own Solar System are an extremely useful
+comparison sample.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">solar</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">SolarSystem</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">solar</span><span class="p">)</span>
+<span class="n">solar</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  [solarsystem] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-SolarSystem.txt
+  [solarsystem] 0/8 semimajoraxes are missing
+  [solarsystem] 0/8 are still missing after NVK3L
+  [solarsystem] 0/8 semimajoraxes are missing
+  [solarsystem] 0/8 are still missing after NVK3L
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Solar System | population of 8 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_4_2.png" src="_images/creating_4_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Confirmed-Planets">
+<h2>Confirmed Planets<a class="headerlink" href="#Confirmed-Planets" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://exoplanetarchive.ipac.caltech.edu">NASA Exoplanet
+Archive</a> maintains a list
+of confirmed transiting exoplanets. These are systems that have been
+characterized in sufficient detail that they are unlikely to be false
+positives.</p>
+<p>This archive contains planets discovered through a variety of methods.
+We can access <em>all</em> exoplanets in the archive, regardless of discovery
+method, with:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">exoplanets</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">Exoplanets</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">exoplanets</span><span class="p">)</span>
+<span class="n">exoplanets</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-AllExoplanets.txt is 0.025 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  0%|          | 0/629 [00:00&lt;?, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   [exoplanets] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-AllExoplanets.txt
+   [exoplanets] 1678/4093 semimajoraxes are missing
+   [exoplanets] 7/4093 are still missing after NVK3L
+   [massradius] skipping 3458 planets that are missing data or uncertainties
+   [massradius] skipping 6 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 629/629 [00:03&lt;00:00, 158.68it/s]
+  0%|          | 0/630 [00:00&lt;?, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   [exoplanets] 1678/4093 semimajoraxes are missing
+   [exoplanets] 7/4093 are still missing after NVK3L
+   [exoplanets] 1678/4093 semimajoraxes are missing
+   [exoplanets] 7/4093 are still missing after NVK3L
+   [exoplanets] no symmetric uncertainties found for &#34;mass&#34;
+   [exoplanets] no symmetric uncertainties found for &#34;radius&#34;
+   [exoplanets] 1678/4093 semimajoraxes are missing
+   [exoplanets] 7/4093 are still missing after NVK3L
+   [exoplanets] 1678/4093 semimajoraxes are missing
+   [exoplanets] 7/4093 are still missing after NVK3L
+   [exoplanets] no symmetric uncertainties found for &#34;mass&#34;
+   [exoplanets] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 3460 planets that are missing data or uncertainties
+   [exoplanets] 1678/4093 semimajoraxes are missing
+   [exoplanets] 7/4093 are still missing after NVK3L
+   [fluxescape] skipping 3 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 630/630 [00:04&lt;00:00, 131.56it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;All Exoplanets | population of 4093 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_6_7.png" src="_images/creating_6_7.png" />
+</div>
+</div>
+<p>For many purposes, it will be really handy to have just those exoplanets
+that transit their stars. To access those:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">transiting</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">TransitingExoplanets</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">transiting</span><span class="p">)</span>
+<span class="n">transiting</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.049 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  3%|▎         | 21/616 [00:00&lt;00:02, 203.66it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[transitingexoplanets] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+   [massradius] skipping 2515 planets that are missing data or uncertainties
+   [massradius] skipping 4 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 616/616 [00:04&lt;00:00, 132.45it/s]
+  4%|▍         | 24/618 [00:00&lt;00:02, 239.43it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+[transitingexoplanets] no symmetric uncertainties found for &#34;mass&#34;
+[transitingexoplanets] no symmetric uncertainties found for &#34;radius&#34;
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+[transitingexoplanets] no symmetric uncertainties found for &#34;mass&#34;
+[transitingexoplanets] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 2516 planets that are missing data or uncertainties
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+   [fluxescape] skipping 1 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 618/618 [00:03&lt;00:00, 162.57it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Transiting Exoplanets | population of 3135 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_8_7.png" src="_images/creating_8_7.png" />
+</div>
+</div>
+<div class="section" id="Kepler-vs.-Non-Kepler">
+<h3>Kepler vs. Non-Kepler<a class="headerlink" href="#Kepler-vs.-Non-Kepler" title="Permalink to this headline">¶</a></h3>
+<p>Which planets were discovered by Kepler or not?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">kepler</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">Kepler</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">kepler</span><span class="p">)</span>
+<span class="n">kepler</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.049 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  9%|▉         | 21/230 [00:00&lt;00:01, 202.35it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+       [kepler] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+       [kepler] 1527/2712 semimajoraxes are missing
+       [kepler] 0/2712 are still missing after NVK3L
+   [massradius] skipping 2479 planets that are missing data or uncertainties
+   [massradius] skipping 3 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 230/230 [00:01&lt;00:00, 192.02it/s]
+ 10%|█         | 24/232 [00:00&lt;00:00, 236.32it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+       [kepler] 1527/2712 semimajoraxes are missing
+       [kepler] 0/2712 are still missing after NVK3L
+       [kepler] 1527/2712 semimajoraxes are missing
+       [kepler] 0/2712 are still missing after NVK3L
+       [kepler] no symmetric uncertainties found for &#34;mass&#34;
+       [kepler] no symmetric uncertainties found for &#34;radius&#34;
+       [kepler] 1527/2712 semimajoraxes are missing
+       [kepler] 0/2712 are still missing after NVK3L
+       [kepler] 1527/2712 semimajoraxes are missing
+       [kepler] 0/2712 are still missing after NVK3L
+       [kepler] no symmetric uncertainties found for &#34;mass&#34;
+       [kepler] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 2479 planets that are missing data or uncertainties
+       [kepler] 1527/2712 semimajoraxes are missing
+       [kepler] 0/2712 are still missing after NVK3L
+   [fluxescape] skipping 1 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 232/232 [00:01&lt;00:00, 150.17it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[5]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Kepler | population of 2712 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_10_7.png" src="_images/creating_10_7.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">nonkepler</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">NonKepler</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">nonkepler</span><span class="p">)</span>
+<span class="n">nonkepler</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.050 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  5%|▌         | 20/386 [00:00&lt;00:01, 194.38it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+    [nonkepler] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+    [nonkepler] 99/423 semimajoraxes are missing
+    [nonkepler] 0/423 are still missing after NVK3L
+   [massradius] skipping 36 planets that are missing data or uncertainties
+   [massradius] skipping 1 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 386/386 [00:02&lt;00:00, 130.14it/s]
+  6%|▌         | 24/386 [00:00&lt;00:01, 231.28it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+    [nonkepler] 99/423 semimajoraxes are missing
+    [nonkepler] 0/423 are still missing after NVK3L
+    [nonkepler] 99/423 semimajoraxes are missing
+    [nonkepler] 0/423 are still missing after NVK3L
+    [nonkepler] no symmetric uncertainties found for &#34;mass&#34;
+    [nonkepler] no symmetric uncertainties found for &#34;radius&#34;
+    [nonkepler] 99/423 semimajoraxes are missing
+    [nonkepler] 0/423 are still missing after NVK3L
+    [nonkepler] 99/423 semimajoraxes are missing
+    [nonkepler] 0/423 are still missing after NVK3L
+    [nonkepler] no symmetric uncertainties found for &#34;mass&#34;
+    [nonkepler] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 37 planets that are missing data or uncertainties
+    [nonkepler] 99/423 semimajoraxes are missing
+    [nonkepler] 0/423 are still missing after NVK3L
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 386/386 [00:02&lt;00:00, 145.79it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Non-Kepler | population of 423 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_11_7.png" src="_images/creating_11_7.png" />
+</div>
+</div>
+</div>
+<div class="section" id="TESS-vs.-Non-TESS">
+<h3>TESS vs. Non-TESS<a class="headerlink" href="#TESS-vs.-Non-TESS" title="Permalink to this headline">¶</a></h3>
+<p>Which (confirmed) planets were discovered by TESS or not?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">tess</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">TESS</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">tess</span><span class="p">)</span>
+<span class="n">tess</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.050 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 16/16 [00:00&lt;00:00, 177.11it/s]
+  0%|          | 0/16 [00:00&lt;?, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+         [tess] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+         [tess] 1/32 semimajoraxes are missing
+         [tess] 0/32 are still missing after NVK3L
+   [massradius] skipping 16 planets that are missing data or uncertainties
+   [massradius] skipping 0 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+         [tess] 1/32 semimajoraxes are missing
+         [tess] 0/32 are still missing after NVK3L
+         [tess] 1/32 semimajoraxes are missing
+         [tess] 0/32 are still missing after NVK3L
+         [tess] no symmetric uncertainties found for &#34;mass&#34;
+         [tess] no symmetric uncertainties found for &#34;radius&#34;
+         [tess] 1/32 semimajoraxes are missing
+         [tess] 0/32 are still missing after NVK3L
+         [tess] 1/32 semimajoraxes are missing
+         [tess] 0/32 are still missing after NVK3L
+         [tess] no symmetric uncertainties found for &#34;mass&#34;
+         [tess] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 16 planets that are missing data or uncertainties
+         [tess] 1/32 semimajoraxes are missing
+         [tess] 0/32 are still missing after NVK3L
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 16/16 [00:00&lt;00:00, 189.20it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[7]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;TESS | population of 32 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_13_5.png" src="_images/creating_13_5.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">nontess</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">NonTESS</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">nontess</span><span class="p">)</span>
+<span class="n">tess</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.050 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  4%|▎         | 21/600 [00:00&lt;00:02, 205.91it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+      [nontess] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+      [nontess] 1625/3103 semimajoraxes are missing
+      [nontess] 0/3103 are still missing after NVK3L
+   [massradius] skipping 2499 planets that are missing data or uncertainties
+   [massradius] skipping 4 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 600/600 [00:04&lt;00:00, 143.96it/s]
+  0%|          | 0/602 [00:00&lt;?, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+      [nontess] 1625/3103 semimajoraxes are missing
+      [nontess] 0/3103 are still missing after NVK3L
+      [nontess] 1625/3103 semimajoraxes are missing
+      [nontess] 0/3103 are still missing after NVK3L
+      [nontess] no symmetric uncertainties found for &#34;mass&#34;
+      [nontess] no symmetric uncertainties found for &#34;radius&#34;
+      [nontess] 1625/3103 semimajoraxes are missing
+      [nontess] 0/3103 are still missing after NVK3L
+      [nontess] 1625/3103 semimajoraxes are missing
+      [nontess] 0/3103 are still missing after NVK3L
+      [nontess] no symmetric uncertainties found for &#34;mass&#34;
+      [nontess] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 2500 planets that are missing data or uncertainties
+      [nontess] 1625/3103 semimajoraxes are missing
+      [nontess] 0/3103 are still missing after NVK3L
+   [fluxescape] skipping 1 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 602/602 [00:05&lt;00:00, 111.48it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[8]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;TESS | population of 32 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_14_7.png" src="_images/creating_14_7.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Space-vs.-Ground">
+<h3>Space vs. Ground<a class="headerlink" href="#Space-vs.-Ground" title="Permalink to this headline">¶</a></h3>
+<p>Which planets were discovered from telescopes in space or telescopes on
+the ground?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">space</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">Space</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">space</span><span class="p">)</span>
+<span class="n">space</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.050 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  7%|▋         | 20/275 [00:00&lt;00:01, 196.31it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+        [space] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+        [space] 1531/2775 semimajoraxes are missing
+        [space] 0/2775 are still missing after NVK3L
+   [massradius] skipping 2497 planets that are missing data or uncertainties
+   [massradius] skipping 3 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 275/275 [00:01&lt;00:00, 166.47it/s]
+  8%|▊         | 23/276 [00:00&lt;00:01, 221.46it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+        [space] 1531/2775 semimajoraxes are missing
+        [space] 0/2775 are still missing after NVK3L
+        [space] 1531/2775 semimajoraxes are missing
+        [space] 0/2775 are still missing after NVK3L
+        [space] no symmetric uncertainties found for &#34;mass&#34;
+        [space] no symmetric uncertainties found for &#34;radius&#34;
+        [space] 1531/2775 semimajoraxes are missing
+        [space] 0/2775 are still missing after NVK3L
+        [space] 1531/2775 semimajoraxes are missing
+        [space] 0/2775 are still missing after NVK3L
+        [space] no symmetric uncertainties found for &#34;mass&#34;
+        [space] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 2498 planets that are missing data or uncertainties
+        [space] 1531/2775 semimajoraxes are missing
+        [space] 0/2775 are still missing after NVK3L
+   [fluxescape] skipping 1 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 276/276 [00:02&lt;00:00, 135.68it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Space-based | population of 2775 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_16_7.png" src="_images/creating_16_7.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ground</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">Ground</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">ground</span><span class="p">)</span>
+<span class="n">ground</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.051 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  6%|▌         | 19/341 [00:00&lt;00:01, 183.35it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+       [ground] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+       [ground] 95/360 semimajoraxes are missing
+       [ground] 0/360 are still missing after NVK3L
+   [massradius] skipping 18 planets that are missing data or uncertainties
+   [massradius] skipping 1 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 341/341 [00:03&lt;00:00, 111.55it/s]
+  7%|▋         | 25/342 [00:00&lt;00:01, 240.86it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+       [ground] 95/360 semimajoraxes are missing
+       [ground] 0/360 are still missing after NVK3L
+       [ground] 95/360 semimajoraxes are missing
+       [ground] 0/360 are still missing after NVK3L
+       [ground] no symmetric uncertainties found for &#34;mass&#34;
+       [ground] no symmetric uncertainties found for &#34;radius&#34;
+       [ground] 95/360 semimajoraxes are missing
+       [ground] 0/360 are still missing after NVK3L
+       [ground] 95/360 semimajoraxes are missing
+       [ground] 0/360 are still missing after NVK3L
+       [ground] no symmetric uncertainties found for &#34;mass&#34;
+       [ground] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 18 planets that are missing data or uncertainties
+       [ground] 95/360 semimajoraxes are missing
+       [ground] 0/360 are still missing after NVK3L
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 342/342 [00:02&lt;00:00, 142.78it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[10]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Ground-based | population of 360 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_17_7.png" src="_images/creating_17_7.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Good-mass-or-bad-masses?">
+<h3>Good mass or bad masses?<a class="headerlink" href="#Good-mass-or-bad-masses?" title="Permalink to this headline">¶</a></h3>
+<p>Which planets have masses that have been detected at better than
+<span class="math">\(2.5\sigma\)</span>?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">good</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">GoodMass</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">good</span><span class="p">)</span>
+<span class="n">good</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.051 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+  4%|▎         | 20/539 [00:00&lt;00:02, 199.49it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+     [goodmass] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+     [goodmass] no symmetric uncertainties found for &#34;mass&#34;
+     [goodmass] no symmetric uncertainties found for &#34;mass&#34;
+     [goodmass] 144/539 semimajoraxes are missing
+     [goodmass] 0/539 are still missing after NVK3L
+   [massradius] skipping 0 planets that are missing data or uncertainties
+   [massradius] skipping 0 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 539/539 [00:03&lt;00:00, 146.42it/s]
+  4%|▍         | 24/539 [00:00&lt;00:02, 239.28it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+     [goodmass] 144/539 semimajoraxes are missing
+     [goodmass] 0/539 are still missing after NVK3L
+     [goodmass] 144/539 semimajoraxes are missing
+     [goodmass] 0/539 are still missing after NVK3L
+     [goodmass] no symmetric uncertainties found for &#34;mass&#34;
+     [goodmass] no symmetric uncertainties found for &#34;radius&#34;
+     [goodmass] 144/539 semimajoraxes are missing
+     [goodmass] 0/539 are still missing after NVK3L
+     [goodmass] 144/539 semimajoraxes are missing
+     [goodmass] 0/539 are still missing after NVK3L
+     [goodmass] no symmetric uncertainties found for &#34;mass&#34;
+     [goodmass] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 0 planets that are missing data or uncertainties
+     [goodmass] 144/539 semimajoraxes are missing
+     [goodmass] 0/539 are still missing after NVK3L
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 539/539 [00:04&lt;00:00, 116.31it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[11]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Good Mass | population of 539 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_19_7.png" src="_images/creating_19_7.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">bad</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">BadMass</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">bad</span><span class="p">)</span>
+<span class="n">bad</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.052 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+ 27%|██▋       | 21/77 [00:00&lt;00:00, 202.24it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+      [badmass] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+      [badmass] no symmetric uncertainties found for &#34;mass&#34;
+      [badmass] no symmetric uncertainties found for &#34;mass&#34;
+      [badmass] 1482/2596 semimajoraxes are missing
+      [badmass] 0/2596 are still missing after NVK3L
+   [massradius] skipping 2515 planets that are missing data or uncertainties
+   [massradius] skipping 4 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 77/77 [00:00&lt;00:00, 197.58it/s]
+ 32%|███▏      | 25/79 [00:00&lt;00:00, 247.51it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+      [badmass] 1482/2596 semimajoraxes are missing
+      [badmass] 0/2596 are still missing after NVK3L
+      [badmass] 1482/2596 semimajoraxes are missing
+      [badmass] 0/2596 are still missing after NVK3L
+      [badmass] no symmetric uncertainties found for &#34;mass&#34;
+      [badmass] no symmetric uncertainties found for &#34;radius&#34;
+      [badmass] 1482/2596 semimajoraxes are missing
+      [badmass] 0/2596 are still missing after NVK3L
+      [badmass] 1482/2596 semimajoraxes are missing
+      [badmass] 0/2596 are still missing after NVK3L
+      [badmass] no symmetric uncertainties found for &#34;mass&#34;
+      [badmass] no symmetric uncertainties found for &#34;radius&#34;
+   [fluxescape] skipping 2516 planets that are missing data or uncertainties
+      [badmass] 1482/2596 semimajoraxes are missing
+      [badmass] 0/2596 are still missing after NVK3L
+   [fluxescape] skipping 1 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+100%|██████████| 79/79 [00:00&lt;00:00, 229.90it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Bad Mass | population of 2596 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_20_7.png" src="_images/creating_20_7.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="TESS-Objects-of-Interest">
+<h2>TESS Objects of Interest<a class="headerlink" href="#TESS-Objects-of-Interest" title="Permalink to this headline">¶</a></h2>
+<p>These are mostly still candidate planets, but really useful for helping
+coordinate follow-up efforts!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">toi</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">TOI</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">toi</span><span class="p">)</span>
+<span class="n">toi</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TOI.txt is 0.009 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+0it [00:00, ?it/s]
+0it [00:00, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+          [toi] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TOI.txt
+          [toi] 1288/1288 semimajoraxes are missing
+          [toi] 114/1288 are still missing after NVK3L
+          [toi] no asymmetric uncertainties found for &#34;mass&#34;
+          [toi] no asymmetric uncertainties found for &#34;radius&#34;
+          [toi] no asymmetric uncertainties found for &#34;mass&#34;
+          [toi] no asymmetric uncertainties found for &#34;radius&#34;
+   [massradius] skipping 1288 planets that are missing data or uncertainties
+   [massradius] skipping 0 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+          [toi] 1288/1288 semimajoraxes are missing
+          [toi] 114/1288 are still missing after NVK3L
+          [toi] 1288/1288 semimajoraxes are missing
+          [toi] 114/1288 are still missing after NVK3L
+          [toi] 1288/1288 semimajoraxes are missing
+          [toi] 114/1288 are still missing after NVK3L
+          [toi] 1288/1288 semimajoraxes are missing
+          [toi] 114/1288 are still missing after NVK3L
+   [fluxescape] skipping 1288 planets that are missing data or uncertainties
+          [toi] 1288/1288 semimajoraxes are missing
+          [toi] 114/1288 are still missing after NVK3L
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[13]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;TOI | population of 1288 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_22_5.png" src="_images/creating_22_5.png" />
+</div>
+</div>
+<div class="section" id="Brand-New-TOIs-vs.-Previously-Known-TOIs">
+<h3>Brand New TOIs vs. Previously Known TOIs<a class="headerlink" href="#Brand-New-TOIs-vs.-Previously-Known-TOIs" title="Permalink to this headline">¶</a></h3>
+<p>Which TESS Objects of Interest are brand new, and which were previously
+known?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">new_toi</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">BrandNewTOI</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">new_toi</span><span class="p">)</span>
+<span class="n">new_toi</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.052 days old.
+Should it be updated? [y/N]
+      [nontess] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+/Users/zkbt/.exoatlas/data/standardized-TOI.txt is 0.009 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+0it [00:00, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  [brandnewtoi] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TOI.txt
+  [brandnewtoi] 1117/1117 semimajoraxes are missing
+  [brandnewtoi] 110/1117 are still missing after NVK3L
+  [brandnewtoi] no asymmetric uncertainties found for &#34;mass&#34;
+  [brandnewtoi] no asymmetric uncertainties found for &#34;radius&#34;
+  [brandnewtoi] no asymmetric uncertainties found for &#34;mass&#34;
+  [brandnewtoi] no asymmetric uncertainties found for &#34;radius&#34;
+   [massradius] skipping 1117 planets that are missing data or uncertainties
+   [massradius] skipping 0 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+  [brandnewtoi] 1117/1117 semimajoraxes are missing
+  [brandnewtoi] 110/1117 are still missing after NVK3L
+  [brandnewtoi] 1117/1117 semimajoraxes are missing
+  [brandnewtoi] 110/1117 are still missing after NVK3L
+  [brandnewtoi] 1117/1117 semimajoraxes are missing
+  [brandnewtoi] 110/1117 are still missing after NVK3L
+  [brandnewtoi] 1117/1117 semimajoraxes are missing
+  [brandnewtoi] 110/1117 are still missing after NVK3L
+   [fluxescape] skipping 1117 planets that are missing data or uncertainties
+  [brandnewtoi] 1117/1117 semimajoraxes are missing
+  [brandnewtoi] 110/1117 are still missing after NVK3L
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+
+0it [00:00, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Brand New TOI | population of 1117 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_24_7.png" src="_images/creating_24_7.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">previous_toi</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">PreviouslyKnownTOI</span><span class="p">()</span>
+<span class="n">ea</span><span class="o">.</span><span class="n">physical_summary</span><span class="p">(</span><span class="n">previous_toi</span><span class="p">)</span>
+<span class="n">previous_toi</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.052 days old.
+Should it be updated? [y/N]
+      [nontess] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+/Users/zkbt/.exoatlas/data/standardized-TOI.txt is 0.009 days old.
+Should it be updated? [y/N]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+0it [00:00, ?it/s]
+0it [00:00, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[previouslyknowntoi] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TOI.txt
+[previouslyknowntoi] 171/171 semimajoraxes are missing
+[previouslyknowntoi] 4/171 are still missing after NVK3L
+[previouslyknowntoi] no asymmetric uncertainties found for &#34;mass&#34;
+[previouslyknowntoi] no asymmetric uncertainties found for &#34;radius&#34;
+[previouslyknowntoi] no asymmetric uncertainties found for &#34;mass&#34;
+[previouslyknowntoi] no asymmetric uncertainties found for &#34;radius&#34;
+   [massradius] skipping 171 planets that are missing data or uncertainties
+   [massradius] skipping 0 planets that are consistent with zero
+   [massradius] plotting inked errorbars, this may take a while
+[previouslyknowntoi] 171/171 semimajoraxes are missing
+[previouslyknowntoi] 4/171 are still missing after NVK3L
+[previouslyknowntoi] 171/171 semimajoraxes are missing
+[previouslyknowntoi] 4/171 are still missing after NVK3L
+[previouslyknowntoi] 171/171 semimajoraxes are missing
+[previouslyknowntoi] 4/171 are still missing after NVK3L
+[previouslyknowntoi] 171/171 semimajoraxes are missing
+[previouslyknowntoi] 4/171 are still missing after NVK3L
+   [fluxescape] skipping 171 planets that are missing data or uncertainties
+[previouslyknowntoi] 171/171 semimajoraxes are missing
+[previouslyknowntoi] 4/171 are still missing after NVK3L
+   [fluxescape] skipping 0 planets that are consistent with zero
+   [fluxescape] plotting inked errorbars, this may take a while
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[15]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Previously Known TOI | population of 171 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/creating_25_5.png" src="_images/creating_25_5.png" />
+</div>
+</div>
+<p>From all these basic populations, you can make your own to play with by
+indexing, slicing, or masking as described in
+<a class="reference external" href="exploring.html">Exploring</a>. Have fun!</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="exploring.html">Exploring</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Solar-System">Solar System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Confirmed-Planets">Confirmed Planets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#TESS-Objects-of-Interest">TESS Objects of Interest</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualizing.html">Visualizing</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="exploring.html" title="previous chapter">Exploring</a></li>
+      <li>Next: <a href="visualizing.html" title="next chapter">Visualizing</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/creating.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Zach Berta-Thompson.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/creating.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

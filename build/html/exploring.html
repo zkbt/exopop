@@ -1,0 +1,821 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exploring &#8212; exoplanet-atlas 0.2.4 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating" href="creating.html" />
+    <link rel="prev" title="exoplanet-atlas" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+</style>
+<div class="section" id="Exploring">
+<h1>Exploring<a class="headerlink" href="#Exploring" title="Permalink to this headline">¶</a></h1>
+<p>An exoplanet <code class="docutils literal"><span class="pre">Population</span></code> is designed to be a (hopefully!) relatively
+easy way to interact with data for a group of exoplanet systems. Here we
+step through the basics of how we can explore a population of planets,
+access standardized planet properties, and filter subsets of planet
+populations.</p>
+<div class="section" id="Getting-started">
+<h2>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">exoatlas</span></code> package contains the tools we will use. All planet
+properties inside a population have astropy
+<a class="reference external" href="https://docs.astropy.org/en/stable/units/">units</a> associated with
+them, so we make also want to have access to those units for our
+calculations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">exoatlas</span> <span class="k">as</span> <span class="nn">ea</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+</pre></div>
+</div>
+</div>
+<p>We can always check what version of <code class="docutils literal"><span class="pre">exoatlas</span></code> we&#8217;re using with its
+hidden <code class="docutils literal"><span class="pre">.__version__</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ea</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&#39;0.2.4&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Create-a-Population">
+<h2>Create a <code class="docutils literal"><span class="pre">Population</span></code><a class="headerlink" href="#Create-a-Population" title="Permalink to this headline">¶</a></h2>
+<p>Now, to get started, we&#8217;ll make a population that contains all confirmed
+transiting exoplanets. We can read more about the different populations
+we can create over one the <a class="reference external" href="creating.html">Creating</a> page. When we
+create this population, the code will download a table of the latest
+data from the NASA Exoplanet Archive.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pop</span> <span class="o">=</span> <span class="n">ea</span><span class="o">.</span><span class="n">TransitingExoplanets</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt is 0.009 days old.
+Should it be updated? [y/N]
+[transitingexoplanets] Loaded standardized table from /Users/zkbt/.exoatlas/data/standardized-TransitingExoplanets.txt
+</pre></div></div>
+</div>
+<p>(The code will let you know how long ago your local dataset was updated,
+and ask if you&#8217;d like to update it now.)</p>
+</div>
+<div class="section" id="What's-inside-a-Population?">
+<h2>What&#8217;s inside a <code class="docutils literal"><span class="pre">Population</span></code>?<a class="headerlink" href="#What's-inside-a-Population?" title="Permalink to this headline">¶</a></h2>
+<p>The core ingredient to an exoplanet <code class="docutils literal"><span class="pre">Population</span></code> is a table of planet
+properties that have been standardized and populated with astropy units.
+This <code class="docutils literal"><span class="pre">pop.standard</span></code> table is an astropy
+<a class="reference external" href="https://docs.astropy.org/en/stable/table/">Table</a>, so its contents
+can be accessed or modified as any other astropy <code class="docutils literal"><span class="pre">Table</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">standard</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<i>Table length=3135</i>
+<table id="table4349223768" class="table-striped table-bordered table-condensed">
+<thead><tr><th>name</th><th>ra</th><th>dec</th><th>period</th><th>semimajoraxis</th><th>e</th><th>omega</th><th>inclination</th><th>transit_epoch</th><th>transit_duration</th><th>transit_depth</th><th>stellar_teff</th><th>stellar_radius</th><th>stellar_mass</th><th>UJmag</th><th>VJmag</th><th>BJmag</th><th>RCmag</th><th>ICmag</th><th>Jmag</th><th>Hmag</th><th>Kmag</th><th>WISE1mag</th><th>WISE2mag</th><th>WISE3mag</th><th>WISE4mag</th><th>radius</th><th>radius_uncertainty_upper</th><th>radius_uncertainty_lower</th><th>transit_ar</th><th>transit_b</th><th>rv_semiamplitude</th><th>mass</th><th>mass_uncertainty_upper</th><th>mass_uncertainty_lower</th><th>distance</th><th>distance_uncertainty_upper</th><th>distance_uncertainty_lower</th><th>discoverer</th></tr></thead>
+<thead><tr><th></th><th>deg</th><th>deg</th><th>d</th><th>AU</th><th></th><th>deg</th><th>deg</th><th>d</th><th>d</th><th></th><th>K</th><th>solRad</th><th>solMass</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th>earthRad</th><th>earthRad</th><th>earthRad</th><th></th><th></th><th></th><th>earthMass</th><th>earthMass</th><th>earthMass</th><th>pc</th><th>pc</th><th>pc</th><th></th></tr></thead>
+<thead><tr><th>str17</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str44</th></tr></thead>
+<tr><td>55Cnce</td><td>133.149216</td><td>28.330818</td><td>0.736539</td><td>0.01544</td><td>nan</td><td>nan</td><td>83.3</td><td>2455733.013</td><td>nan</td><td>nan</td><td>5196.0</td><td>0.94</td><td>0.91</td><td>nan</td><td>5.96</td><td>6.83</td><td>nan</td><td>nan</td><td>4.768</td><td>4.265</td><td>4.015</td><td>4.001</td><td>3.296</td><td>4.051</td><td>4.014</td><td>1.91</td><td>0.08</td><td>-0.08</td><td>nan</td><td>0.41</td><td>nan</td><td>8.08</td><td>0.31</td><td>-0.31</td><td>12.59</td><td>0.01</td><td>-0.01</td><td>McDonald Observatory</td></tr>
+<tr><td>BD+20594b</td><td>53.650967</td><td>20.599232</td><td>41.6855</td><td>nan</td><td>0.0</td><td>nan</td><td>89.55</td><td>nan</td><td>nan</td><td>0.00049</td><td>5766.0</td><td>1.08</td><td>1.67</td><td>nan</td><td>11.038</td><td>11.728</td><td>nan</td><td>nan</td><td>9.77</td><td>9.432</td><td>9.368</td><td>9.31</td><td>9.344</td><td>9.332</td><td>8.976</td><td>2.578</td><td>0.112</td><td>-0.112</td><td>55.8</td><td>nan</td><td>3.1</td><td>22.2481</td><td>9.5349</td><td>-9.5349</td><td>180.39</td><td>1.25</td><td>-1.25</td><td>K2</td></tr>
+<tr><td>CoRoT-10b</td><td>291.063708</td><td>0.746143</td><td>13.2406</td><td>0.1055</td><td>0.53</td><td>218.9</td><td>88.55</td><td>2454273.3436</td><td>0.1242</td><td>0.0161036</td><td>5075.0</td><td>0.79</td><td>0.89</td><td>nan</td><td>15.22</td><td>16.68</td><td>nan</td><td>nan</td><td>12.527</td><td>11.929</td><td>11.782</td><td>11.64</td><td>11.752</td><td>11.396</td><td>8.923</td><td>10.87</td><td>0.78</td><td>-0.78</td><td>31.33</td><td>0.85</td><td>301.0</td><td>874.0</td><td>50.85</td><td>-50.85</td><td>345.0</td><td>70.0</td><td>-70.0</td><td>CoRoT</td></tr>
+<tr><td>CoRoT-11b</td><td>280.687263</td><td>5.937688</td><td>2.99433</td><td>0.0436</td><td>0.0</td><td>nan</td><td>83.17</td><td>2454597.679</td><td>0.1042</td><td>0.011449</td><td>6440.0</td><td>1.37</td><td>1.27</td><td>nan</td><td>12.939</td><td>13.596</td><td>nan</td><td>nan</td><td>11.589</td><td>11.416</td><td>11.248</td><td>11.173</td><td>11.265</td><td>11.47</td><td>9.198</td><td>16.03</td><td>0.34</td><td>-0.34</td><td>6.89</td><td>0.818</td><td>280.0</td><td>740.51</td><td>108.06</td><td>-108.06</td><td>560.0</td><td>30.0</td><td>-30.0</td><td>CoRoT</td></tr>
+<tr><td>CoRoT-12b</td><td>100.765677</td><td>-1.296439</td><td>2.828042</td><td>0.04016</td><td>0.07</td><td>105.0</td><td>85.48</td><td>2454398.62707</td><td>0.10726</td><td>0.01744</td><td>5675.0</td><td>1.12</td><td>1.08</td><td>nan</td><td>15.515</td><td>16.343</td><td>nan</td><td>nan</td><td>14.024</td><td>13.63</td><td>13.557</td><td>13.47</td><td>13.47</td><td>12.53</td><td>8.61</td><td>16.14</td><td>1.46</td><td>-1.46</td><td>nan</td><td>0.573</td><td>125.5</td><td>291.438</td><td>22.247</td><td>-20.658</td><td>1150.0</td><td>85.0</td><td>-85.0</td><td>CoRoT</td></tr>
+<tr><td>CoRoT-13b</td><td>102.721137</td><td>-5.086445</td><td>4.03519</td><td>0.051</td><td>0.0</td><td>nan</td><td>88.02</td><td>2454790.8091</td><td>0.1308</td><td>nan</td><td>5945.0</td><td>1.01</td><td>1.09</td><td>nan</td><td>15.039</td><td>15.777</td><td>nan</td><td>nan</td><td>13.71</td><td>13.406</td><td>13.376</td><td>13.17</td><td>13.217</td><td>12.615</td><td>8.946</td><td>9.92</td><td>0.157</td><td>-0.157</td><td>10.81</td><td>0.374</td><td>157.8</td><td>415.704</td><td>20.976</td><td>-20.976</td><td>1060.0</td><td>100.0</td><td>-100.0</td><td>CoRoT</td></tr>
+<tr><td>CoRoT-14b</td><td>103.424211</td><td>-5.536037</td><td>1.51214</td><td>0.027</td><td>0.0</td><td>nan</td><td>79.6</td><td>2454787.6694</td><td>0.0693</td><td>nan</td><td>6035.0</td><td>1.21</td><td>1.13</td><td>nan</td><td>16.033</td><td>16.891</td><td>nan</td><td>nan</td><td>14.321</td><td>14.007</td><td>13.806</td><td>13.679</td><td>13.729</td><td>12.03</td><td>9.14</td><td>12.22</td><td>0.78</td><td>-0.78</td><td>4.78</td><td>0.86</td><td>1230.0</td><td>2415.4</td><td>190.7</td><td>-190.7</td><td>1340.0</td><td>110.0</td><td>-110.0</td><td>CoRoT</td></tr>
+<tr><td>CoRoT-16b</td><td>278.524691</td><td>-6.002595</td><td>5.35227</td><td>0.0618</td><td>0.33</td><td>168.41</td><td>85.01</td><td>2454923.9138</td><td>0.0996</td><td>0.0102</td><td>5650.0</td><td>1.19</td><td>1.1</td><td>nan</td><td>15.63</td><td>16.68</td><td>nan</td><td>nan</td><td>13.496</td><td>12.98</td><td>12.847</td><td>nan</td><td>nan</td><td>nan</td><td>nan</td><td>13.11</td><td>1.79</td><td>-1.57</td><td>11.2</td><td>0.825</td><td>61.96</td><td>170.032</td><td>27.014</td><td>-26.379</td><td>840.0</td><td>90.0</td><td>-90.0</td><td>CoRoT</td></tr>
+<tr><td>CoRoT-17b</td><td>278.699254</td><td>-6.612234</td><td>3.7681</td><td>0.0461</td><td>0.0</td><td>0.0</td><td>88.34</td><td>2454923.3093</td><td>0.196667</td><td>0.0044</td><td>5740.0</td><td>1.59</td><td>1.04</td><td>nan</td><td>15.46</td><td>nan</td><td>nan</td><td>nan</td><td>13.174</td><td>12.615</td><td>12.472</td><td>nan</td><td>nan</td><td>nan</td><td>nan</td><td>11.43</td><td>0.78</td><td>-0.78</td><td>6.23</td><td>0.18</td><td>312.4</td><td>772.29</td><td>95.34</td><td>-95.34</td><td>920.0</td><td>50.0</td><td>-50.0</td><td>CoRoT</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>WTS-1b</td><td>293.9932</td><td>36.290325</td><td>3.352057</td><td>0.047</td><td>0.1</td><td>nan</td><td>85.5</td><td>2454318.7472</td><td>nan</td><td>0.017636</td><td>6250.0</td><td>1.15</td><td>1.2</td><td>nan</td><td>16.13</td><td>nan</td><td>nan</td><td>nan</td><td>15.375</td><td>15.187</td><td>15.271</td><td>nan</td><td>nan</td><td>nan</td><td>nan</td><td>16.7</td><td>1.79</td><td>-2.02</td><td>nan</td><td>0.69</td><td>nan</td><td>1274.44</td><td>111.24</td><td>-111.24</td><td>3200.0</td><td>900.0</td><td>-400.0</td><td>United Kingdom Infrared Telescope</td></tr>
+<tr><td>WTS-2b</td><td>293.732796</td><td>36.815491</td><td>1.0187068</td><td>0.01855</td><td>0.0</td><td>nan</td><td>83.55</td><td>2454317.81333</td><td>nan</td><td>nan</td><td>5000.0</td><td>0.75</td><td>0.82</td><td>nan</td><td>15.9</td><td>16.8</td><td>nan</td><td>nan</td><td>13.928</td><td>13.464</td><td>13.414</td><td>13.299</td><td>13.367</td><td>12.107</td><td>9.176</td><td>15.278</td><td>0.684</td><td>-0.684</td><td>nan</td><td>0.584</td><td>256.0</td><td>355.9696</td><td>50.8528</td><td>-50.8528</td><td>1000.0</td><td>nan</td><td>nan</td><td>United Kingdom Infrared Telescope</td></tr>
+<tr><td>Wolf503b</td><td>206.847687</td><td>-6.136875</td><td>6.00118</td><td>0.0571</td><td>nan</td><td>nan</td><td>nan</td><td>2458185.36087</td><td>0.0550417</td><td>nan</td><td>4716.0</td><td>0.69</td><td>0.69</td><td>nan</td><td>10.26</td><td>11.27</td><td>nan</td><td>9.09</td><td>8.324</td><td>7.774</td><td>7.617</td><td>nan</td><td>nan</td><td>nan</td><td>nan</td><td>2.03</td><td>0.076</td><td>-0.073</td><td>nan</td><td>0.387</td><td>nan</td><td>nan</td><td>inf</td><td>inf</td><td>44.58</td><td>0.1</td><td>-0.1</td><td>K2</td></tr>
+<tr><td>XO-1b</td><td>240.54935</td><td>28.169586</td><td>3.94153</td><td>nan</td><td>0.0</td><td>nan</td><td>88.81</td><td>nan</td><td>nan</td><td>0.018000000000000002</td><td>5750.0</td><td>0.88</td><td>0.88</td><td>nan</td><td>11.19</td><td>11.85</td><td>10.81</td><td>10.43</td><td>9.939</td><td>9.601</td><td>9.527</td><td>9.495</td><td>9.518</td><td>9.507</td><td>9.248</td><td>12.778</td><td>0.785</td><td>-0.785</td><td>11.37</td><td>nan</td><td>116.0</td><td>263.7989</td><td>41.3179</td><td>-41.3179</td><td>164.33</td><td>0.62</td><td>-0.62</td><td>XO</td></tr>
+<tr><td>XO-2Nb</td><td>117.026968</td><td>50.2258</td><td>2.61586178</td><td>0.0368</td><td>nan</td><td>nan</td><td>88.01</td><td>2454508.73829</td><td>0.1118292</td><td>nan</td><td>5307.0</td><td>0.99</td><td>0.97</td><td>nan</td><td>11.138</td><td>12.002</td><td>10.669</td><td>10.243</td><td>9.744</td><td>9.34</td><td>9.308</td><td>9.24</td><td>9.31</td><td>9.236</td><td>8.833</td><td>11.131</td><td>0.135</td><td>-0.135</td><td>7.986</td><td>0.28</td><td>nan</td><td>179.89178</td><td>7.94575</td><td>-7.94575</td><td>154.94</td><td>1.45</td><td>-1.45</td><td>XO</td></tr>
+<tr><td>XO-3b</td><td>65.469581</td><td>57.817181</td><td>3.19154</td><td>nan</td><td>0.29</td><td>nan</td><td>79.32</td><td>nan</td><td>nan</td><td>0.0089</td><td>6429.0</td><td>1.54</td><td>0.58</td><td>nan</td><td>9.8</td><td>10.25</td><td>nan</td><td>nan</td><td>9.013</td><td>8.845</td><td>8.791</td><td>8.754</td><td>8.765</td><td>8.736</td><td>8.372</td><td>15.805</td><td>1.345</td><td>-1.345</td><td>4.95</td><td>nan</td><td>1488.0</td><td>2316.9807</td><td>378.2177</td><td>-378.2177</td><td>214.31</td><td>2.7</td><td>-2.7</td><td>XO</td></tr>
+<tr><td>XO-4b</td><td>110.388223</td><td>58.268108</td><td>4.12508</td><td>nan</td><td>0.0</td><td>nan</td><td>88.8</td><td>nan</td><td>nan</td><td>0.0078000000000000005</td><td>6397.0</td><td>1.45</td><td>1.1</td><td>nan</td><td>10.674</td><td>11.24</td><td>nan</td><td>nan</td><td>9.667</td><td>9.476</td><td>9.406</td><td>9.373</td><td>9.398</td><td>9.378</td><td>8.716</td><td>14.011</td><td>0.897</td><td>-0.897</td><td>7.68</td><td>nan</td><td>168.6</td><td>451.3186</td><td>60.3877</td><td>-60.3877</td><td>274.79</td><td>2.91</td><td>-2.91</td><td>XO</td></tr>
+<tr><td>XO-5b</td><td>116.716527</td><td>39.094578</td><td>4.1877558</td><td>0.0515</td><td>0.0</td><td>nan</td><td>86.8</td><td>2456864.3129</td><td>0.1299</td><td>0.0108</td><td>5430.0</td><td>1.13</td><td>1.04</td><td>nan</td><td>12.13</td><td>nan</td><td>nan</td><td>nan</td><td>10.774</td><td>10.443</td><td>10.345</td><td>10.333</td><td>10.381</td><td>10.292</td><td>8.354</td><td>12.78</td><td>0.34</td><td>-0.34</td><td>nan</td><td>0.55</td><td>146.0</td><td>378.2</td><td>9.53</td><td>-9.53</td><td>278.37</td><td>3.9</td><td>-3.9</td><td>XO</td></tr>
+<tr><td>XO-6b</td><td>94.793282</td><td>73.827682</td><td>3.7650007</td><td>0.0815</td><td>0.0</td><td>nan</td><td>86.0</td><td>2456652.71245</td><td>0.1208333</td><td>nan</td><td>6720.0</td><td>1.93</td><td>1.47</td><td>nan</td><td>10.25</td><td>nan</td><td>nan</td><td>nan</td><td>9.471</td><td>9.266</td><td>9.246</td><td>9.213</td><td>9.232</td><td>9.34</td><td>8.709</td><td>23.203</td><td>2.466</td><td>-2.466</td><td>9.08</td><td>0.633</td><td>450.0</td><td>1398.452</td><td>inf</td><td>inf</td><td>237.06</td><td>2.43</td><td>-2.43</td><td>XO</td></tr>
+<tr><td>piMenc</td><td>84.291214</td><td>-80.469124</td><td>6.2679</td><td>0.06839</td><td>0.0</td><td>nan</td><td>87.456</td><td>2458325.504</td><td>0.1230417</td><td>0.0003</td><td>6037.0</td><td>1.1</td><td>1.09</td><td>6.36</td><td>5.67</td><td>6.25</td><td>nan</td><td>nan</td><td>4.869</td><td>4.424</td><td>4.241</td><td>4.269</td><td>3.972</td><td>4.199</td><td>4.219</td><td>2.042</td><td>0.05</td><td>-0.05</td><td>13.38</td><td>0.59</td><td>1.58</td><td>4.82</td><td>0.84</td><td>-0.86</td><td>18.28</td><td>0.02</td><td>-0.02</td><td>Transiting Exoplanet Survey Satellite (TESS)</td></tr>
+</table></div>
+</div>
+<p>If desired, columns could be added to this standardized table:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="n">pop</span><span class="o">.</span><span class="n">standard</span><span class="p">[</span><span class="s1">&#39;something&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="How-do-we-access-planet-properties?">
+<h2>How do we access planet properties?<a class="headerlink" href="#How-do-we-access-planet-properties?" title="Permalink to this headline">¶</a></h2>
+<p>The main way to access planet properties within a <code class="docutils literal"><span class="pre">Populatoin</span></code> is with
+its attributes. That is, we can access an array of the values for some
+property <code class="docutils literal"><span class="pre">x</span></code> by calling <code class="docutils literal"><span class="pre">pop.x</span></code>. Behind the scenes, the population
+will look to see if there is a column called <code class="docutils literal"><span class="pre">&quot;x&quot;</span></code> in the standardized
+table and return that column. For example, we can get an array of planet
+names with:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>array([&#39;55Cnce&#39;, &#39;BD+20594b&#39;, &#39;CoRoT-10b&#39;, ..., &#39;XO-5b&#39;, &#39;XO-6b&#39;,
+       &#39;piMenc&#39;], dtype=&#39;&lt;U17&#39;)
+</pre></div>
+</div>
+</div>
+<p>Even columns that we separately added to the standardized table can be
+accessed as attributes:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">something</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math">
+$[   5,~   6,~   7,~\dots,~3137,~3138,~3139] \; \mathrm{}$</div></div>
+</div>
+<p>We also have access to quantities that are not directly included in the
+table itself but can be calculated from them. For example, we can get an
+array of the amount of insolation that the planets receive from their
+stars as:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pop</span><span class="o">.</span><span class="n">insolation</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math">
+$[3313157.1,~20290.402,~45613.962,~\dots,~513270.26,~1402428.9,~421394.84] \; \mathrm{\frac{W}{m^{2}}}$</div></div>
+</div>
+<p>In this case, the insolation is calculated from the planet&#8217;s orbital
+separation and the luminosity of the star (which is itself calculated
+from the stellar effective temperature and radius).</p>
+<p>If information needed to do a calculation is missing, <code class="docutils literal"><span class="pre">exoatlas</span></code> will
+try to estimate them from other available information. In the
+<code class="docutils literal"><span class="pre">.insolation</span></code> case, some planets had no semimajor axes defined in the
+<code class="docutils literal"><span class="pre">.standard</span></code> table, but we were able to calculate this quantity from
+the orbital period, the stellar mass, and Newton&#8217;s Version of Kepler&#8217;s
+3rd Law.</p>
+<p>Short descriptions of some common attributes can printed with the
+<code class="docutils literal"><span class="pre">describe_columns()</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ea</span><span class="o">.</span><span class="n">describe_columns</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+               name = name of the planet
+                 ra = Right Ascension of the system
+                dec = Declination of the system
+           distance = distance to the system
+   distance_modulus = apparent magnitude - absolute magnitude
+         discoverer = telescope/project that found this planet
+       stellar_teff = stellar effective temperature
+       stellar_mass = stellar mass
+     stellar_radius = stellar radius
+ stellar_luminosity = luminosity of the star
+ stellar_brightness = photon flux from the star at Earth (a function of wavelength)
+             period = orbital period of the planet
+      semimajoraxis = the semimajor axis of the planet&#39;s orbit
+          a_over_rs = scaled orbital distance a/R*
+                  b = impact parameter b
+                  e = eccentricity
+              omega = argument of periastron
+             radius = planet radius
+               mass = planet mass
+            density = density of the planet
+         insolation = bolometric energy flux the planet receives from its star
+relative_insolation = insolation relative to Earth
+                teq = equilibrium temperature of the planet (assuming 0 albedo)
+    surface_gravity = surface gravity of the planet
+       scale_height = scale height of an H2-rich atmosphere
+    escape_velocity = escape velocity of the planet
+   escape_parameter = ratio of gravitational potential to thermal energy for an H atom
+      transit_epoch = a transit midpoint
+   transit_duration = duration of the transit
+      transit_depth = fraction of starlight the planet blocks
+         transit_ar = (transit-derived) scaled orbital distance a/R*
+          transit_b = (transit-derived) impact parameter b
+transmission_signal = transit depth of one scale height of atmosphere
+    emission_signal = thermal-emission eclipse depth (a function of wavelength)
+  reflection_signal = reflected-light eclipse depth (for an albedo of 1)
+</pre></div></div>
+</div>
+<p>With this toolkit, you can now access the data you need to make some
+pretty fundamental plots in exoplanetary science. For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">relative_insolation</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Flux Received (relative to Earth)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Planet Radius (Earth radii)&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[transitingexoplanets] 1626/3135 semimajoraxes are missing
+[transitingexoplanets] 0/3135 are still missing after NVK3L
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/exploring_22_1.png" src="_images/exploring_22_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="How-do-we-access-some-sub-population-of-planets?">
+<h2>How do we access some sub-population of planets?<a class="headerlink" href="#How-do-we-access-some-sub-population-of-planets?" title="Permalink to this headline">¶</a></h2>
+<p>Often we&#8217;ll want to pull out some subset of a population. We might want
+a smaller sample of planets, or all the planets that meet some
+particular criterion, or maybe the properties of one individual planet.
+In our experience with <code class="docutils literal"><span class="pre">numpy</span></code> arrays or <code class="docutils literal"><span class="pre">astropy</span></code> tables, we&#8217;ve
+often done this by indexing (<code class="docutils literal"><span class="pre">x[0]</span></code> or <code class="docutils literal"><span class="pre">x[[0,</span> <span class="pre">1,</span> <span class="pre">5]]</span></code>), slicing
+(<code class="docutils literal"><span class="pre">x[3:30]</span></code>), or masking (<code class="docutils literal"><span class="pre">x[some_array</span> <span class="pre">&gt;</span> <span class="pre">some_other_array]</span></code>).</p>
+<p>We can apply the same methods to a <code class="docutils literal"><span class="pre">Population</span></code>, creating smaller
+populations by indexing, slicing, or masking. Anything we can do with a
+<code class="docutils literal"><span class="pre">Population</span></code> we can do with one of these sub-<code class="docutils literal"><span class="pre">Population</span></code>s that
+we create.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pop</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[11]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Transiting Exoplanets | population of 3135 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">one_planet</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">one_planet</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 1 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">one_planet</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">one_planet</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">one_planet</span><span class="o">.</span><span class="n">insolation</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   [population] 0/1 semimajoraxes are missing
+   [population] 0/1 are still missing after NVK3L
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[13]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>(array([&#39;55Cnce&#39;], dtype=&#39;&lt;U17&#39;),
+ &lt;Quantity [1.91] earthRad&gt;,
+ &lt;Quantity [3313157.14969688] W / m2&gt;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">prime_planets</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">]]</span>
+<span class="n">prime_planets</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 9 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">first_ten</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">first_ten</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[15]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 10 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">every_other_exoplanet</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">every_other_exoplanet</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[16]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 1568 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">small</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="n">pop</span><span class="o">.</span><span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Rearth</span><span class="p">]</span>
+<span class="n">small</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[17]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 2433 planets&gt;
+</pre></div>
+</div>
+</div>
+<p>Additionally, we can extract an individual planet or a list of planets
+by indexing the population with planet name(s). This is using astropy
+tables&#8217; <code class="docutils literal"><span class="pre">.loc</span></code> functionality, with <code class="docutils literal"><span class="pre">&quot;name&quot;</span></code> being used as an index.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">cute_planet</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[</span><span class="s1">&#39;GJ 1214b&#39;</span><span class="p">]</span>
+<span class="n">cute_planet</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[18]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 1 planets&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">cute_planets</span> <span class="o">=</span> <span class="n">pop</span><span class="p">[[</span><span class="s1">&#39;LHS 1140b&#39;</span><span class="p">,</span> <span class="s1">&#39;GJ 1214b&#39;</span><span class="p">,</span> <span class="s1">&#39;GJ 436b&#39;</span><span class="p">]]</span>
+<span class="n">cute_planets</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[19]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;ExoplanetSubsets of Transiting Exoplanets | population of 3 planets&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Explore!">
+<h2>Explore!<a class="headerlink" href="#Explore!" title="Permalink to this headline">¶</a></h2>
+<p>That&#8217;s about it. For more information about different pre-defined
+populations see <a class="reference external" href="creating.html">Creating</a>, and for more about
+pre-packaged visualizations see <a class="reference external" href="visualizing.html">Visualizing</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exploring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Create-a-Population">Create a <code class="docutils literal"><span class="pre">Population</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#What's-inside-a-Population?">What&#8217;s inside a <code class="docutils literal"><span class="pre">Population</span></code>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#How-do-we-access-planet-properties?">How do we access planet properties?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#How-do-we-access-some-sub-population-of-planets?">How do we access some sub-population of planets?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Explore!">Explore!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="creating.html">Creating</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualizing.html">Visualizing</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">exoplanet-atlas</a></li>
+      <li>Next: <a href="creating.html" title="next chapter">Creating</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/exploring.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Zach Berta-Thompson.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/exploring.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
